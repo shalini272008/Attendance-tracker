@@ -1,0 +1,138 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Attendance Tracker</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 5px 20px #0005;
+        }
+
+        h1 {
+            color: #2563eb;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 8px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 95%;
+            padding: 13px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .green {
+            background: #dcfce7;
+            color: green;
+        }
+
+        .red {
+            background: #fee2e2;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>🎓 Attendance Tracker</h1>
+
+    <input type="text" id="name" placeholder="Student Name">
+
+    <input type="number" id="total" placeholder="Total Classes">
+
+    <input type="number" id="attended" placeholder="Attended Classes">
+
+    <button onclick="calculate()">Calculate Attendance</button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+function calculate() {
+
+    let name = document.getElementById("name").value;
+    let total = Number(document.getElementById("total").value);
+    let attended = Number(document.getElementById("attended").value);
+
+    let result = document.getElementById("result");
+
+    if (name == "" || total <= 0 || attended < 0 || attended > total) {
+        result.style.display = "block";
+        result.className = "red";
+        result.innerHTML = "❌ Please enter valid details.";
+        return;
+    }
+
+    let percentage = (attended / total) * 100;
+
+    result.style.display = "block";
+
+    if (percentage >= 75) {
+
+        result.className = "green";
+
+        result.innerHTML =
+        "<h2>✅ Eligible</h2>" +
+        "<p>Student: <b>" + name + "</b></p>" +
+        "<p>Attendance: <b>" + percentage.toFixed(2) + "%</b></p>" +
+        "<p>Attended: " + attended + " / " + total + "</p>";
+
+    } else {
+
+        result.className = "red";
+
+        result.innerHTML =
+        "<h2>⚠️ Shortage</h2>" +
+        "<p>Student: <b>" + name + "</b></p>" +
+        "<p>Attendance: <b>" + percentage.toFixed(2) + "%</b></p>" +
+        "<p>Attended: " + attended + " / " + total + "</p>";
+
+    }
+}
+
+</script>
+
+</body>
+</html>
+```
